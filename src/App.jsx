@@ -12,10 +12,24 @@ const App = () => {
     ]
     setList(newList)
   }
+  const deleteList = (id) => {
+    const newList = list.filter(list => {
+      return list.id !== id;
+    })
+    setList(newList);
+  }
+  const editList = (id, newCaption) => {
+    let editTitle = list.map((lists) => {
+      if (lists.id === id) {
+        return {...lists, title: newCaption}
+      }
+    })
+    setList(editTitle)
+  } 
   return (
-    <div className='text-green-600'>
+    <div className='max-w-[1000px] mx-auto text-2xl font-mono text-neutral-700'>
       <SearchBox onSubmit={createList}/>
-      <TodoList lists={list}/>
+      <TodoList lists={list} onDelete={deleteList} handleEdit={editList}/>
     </div>
   )
 }
