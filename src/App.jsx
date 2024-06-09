@@ -1,14 +1,18 @@
 import React from 'react'
 import SearchBox from './components/SearchBox'
 import TodoList from './components/TodoList'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import './index.css'
 
 const App = () => {
   const [list, setList] = useState([])
-  const createList = (title) => {
+  const createList = async(title) => {
+    const response = await axios.post('http://localhost:3002/list', {
+      title
+    });
     const newList = [
-      ...list, {id: Math.floor(Math.random() * 9191) , title}
+      ...list, response.data
     ]
     setList(newList)
   }
@@ -18,6 +22,13 @@ const App = () => {
     })
     setList(newList);
   }
+  const fetchList = async () => {
+    const response = await axios.get('http://localhost:3002/list');
+    setList(response.data)
+  }
+  useEffect(() => {
+    fetchList();
+  }, []);
   const editList = (id, newCaption) => {
     let editTitle = list.map((lists) => {
       if (lists.id === id) {
