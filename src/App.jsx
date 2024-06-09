@@ -23,6 +23,7 @@ const App = () => {
       if (lists.id === id) {
         return {...lists, title: newCaption}
       }
+      return lists
     })
     setList(editTitle)
   } 
