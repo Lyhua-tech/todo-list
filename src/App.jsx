@@ -16,7 +16,8 @@ const App = () => {
     ]
     setList(newList)
   }
-  const deleteList = (id) => {
+  const deleteList = async (id) => {
+    await axios.delete(`http://localhost:3002/list/${id}`)
     const newList = list.filter(list => {
       return list.id !== id;
     })
@@ -29,10 +30,13 @@ const App = () => {
   useEffect(() => {
     fetchList();
   }, []);
-  const editList = (id, newCaption) => {
+  const editList = async (id, newCaption) => {
+    const response = await axios.put(`http://localhost:3002/list/${id}`, {
+      title: newCaption
+    })
     let editTitle = list.map((lists) => {
       if (lists.id === id) {
-        return {...lists, title: newCaption}
+        return {...lists, ...response.data}
       }
       return lists
     })

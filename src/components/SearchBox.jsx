@@ -14,20 +14,15 @@ const SearchBox = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className="bg-neutral-400 p-4 rounded-md">
       <label className="block font-medium mb-2">What are your Task today?</label>
-      <div className="flex">
+      <div className="flex gap-1">
         <input 
           type="text" 
           onChange={handleChange} 
           value={title} 
-          className="flex-grow p-2 border border-neutral-400 rounded-l-md focus:outline-none focus:ring-neutral-600 text-neutral-600 text-2xl font-mono bg-neutral-300"
+          className="flex-grow p-2 border border-neutral-400 rounded-md focus:outline-none focus:ring-neutral-600 text-neutral-600 text-[22px] font-mono bg-neutral-300"
           placeholder="Enter your task"
         />
-        <button 
-          type="submit" 
-          className="bg-neutral-600 text-white p-2 px-4 rounded-r-md hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-600 font-mono text-xl"
-        >
-          Add
-        </button>
+        <button className="btn btn-active btn-neutra text-xl font-mono" type="submit">Add</button>
       </div>
     </form>
   )
